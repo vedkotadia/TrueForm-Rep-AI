@@ -1,3 +1,6 @@
+import os
+os.environ["PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION"] = "python"
+
 import cv2
 import argparse
 from utils import *
@@ -27,7 +30,13 @@ mp_pose = mp.solutions.pose
 
 
 if args["video_source"] is not None:
-    cap = cv2.VideoCapture("Exercise Videos/" + args["video_source"])
+    video_source = args["video_source"]
+    if os.path.exists(video_source):
+        cap = cv2.VideoCapture(video_source)
+    elif os.path.exists("Exercise_videos/" + os.path.basename(video_source)):
+        cap = cv2.VideoCapture("Exercise_videos/" + os.path.basename(video_source))
+    else:
+        cap = cv2.VideoCapture("Exercise_videos/" + video_source)
 else:
     cap = cv2.VideoCapture(0)  # webcam
 
