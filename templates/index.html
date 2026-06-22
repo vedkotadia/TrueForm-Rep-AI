@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrueForm AI - Live Fitness Trainer</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-dumbbell"></i>
+                <h1>TrueForm <span>AI</span></h1>
+            </div>
+            <p class="subtitle">Your personal AI fitness trainer powered by computer vision.</p>
+        </header>
+
+        <main>
+            <!-- Controls Section -->
+            <section class="controls glass-panel">
+                <div class="input-group">
+                    <label for="exercise-type"><i class="fa-solid fa-person-running"></i> Select Exercise</label>
+                    <div class="custom-select">
+                        <select id="exercise-type">
+                            <option value="push-up">Push-Up</option>
+                            <option value="pull-up">Pull-Up</option>
+                            <option value="squat">Squat</option>
+                            <option value="sit-up">Sit-Up</option>
+                            <option value="walk">Walk</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="btn-live" class="btn btn-primary">
+                        <i class="fa-solid fa-video"></i>
+                        <span>Start Live Camera</span>
+                    </button>
+                    
+                    <div class="upload-wrapper">
+                        <button id="btn-upload-proxy" class="btn btn-secondary">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <span>Upload Video</span>
+                        </button>
+                        <input type="file" id="video-upload" accept="video/mp4,video/x-m4v,video/*" hidden>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Video Player Section -->
+            <section class="video-container glass-panel hidden" id="video-section">
+                <div class="video-header">
+                    <h2 id="video-title">Live Tracking</h2>
+                    <button id="btn-close" class="btn-icon" title="Stop Session"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="video-wrapper">
+                    <!-- The img tag will receive the MJPEG stream from Flask -->
+                    <img id="video-feed" src="" alt="Live Video Feed">
+                    <div class="loader" id="video-loader">
+                        <div class="spinner"></div>
+                        <p>Initializing AI Model...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2026 TrueForm AI. Built with Flask & Mediapipe.</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
